@@ -1,6 +1,11 @@
 const http = require('http');
 const fs = require('fs');
-
+const db = require("sqlite3").verbose();
+const database = new db.Database("/index.db");
+database.run (
+  "CREATE TABLE student(id integer primary key, name text not null)"
+);
+database.close();
 const server = http.createServer((request,response)=>{
   if (request.method === "GET") {
     if(request.url === "/") {
